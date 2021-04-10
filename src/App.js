@@ -2,20 +2,26 @@ import React, { useState } from "react"
 import './App.css';
 
 function App() {
-  const [wordsInput, setWordsInput] = useState("")
+  const [text, setText] = useState("")
 
   function handleChange(event) {
-    setWordsInput(event.target.value)
+    setText(event.target.value)
   }
 
-  console.log(wordsInput)
+  //trim takes out empty spaces from the ends of the array.
+  //filter to avoid having wordCount = 1 when there is no text in the textarea.
+  function countWords(text) {
+    const wordCount = text.trim().split(" ")
+    return wordCount.filter(word => word !== "" ).length
+  }
+  
 
   return (
     <div>
       <h1>Speed Typing Game</h1>
-      <textarea value={wordsInput} onChange={handleChange}/>
+      <textarea value={text} onChange={handleChange}/>
       <h4>Time remaining: ???</h4>
-      <button>Start!</button>
+      <button onClick={() => console.log(countWords(text))}>Start!</button>
       <h1>Word Count: </h1>
     </div>
     
